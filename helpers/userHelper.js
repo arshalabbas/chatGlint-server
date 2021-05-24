@@ -1,4 +1,4 @@
-let users = [{ id: "545sfdf54", name: "arshal abbas", room: "defaultRoom" }];
+let users = [];
 
 module.exports = {
   addUser: ({ id, name, room }) => {
