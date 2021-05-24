@@ -5,6 +5,8 @@ const {
   removeUser,
 } = require("../helpers/userHelper");
 
+const admin = "chatGlint-admin-28-09-2003";
+
 function socket(io) {
   io.on("connection", (socket) => {
     socket.on("join", ({ name, room }) => {
@@ -15,11 +17,11 @@ function socket(io) {
       socket.join(user.room);
 
       socket.emit("message", {
-        user: "admin-alert-msg-8956-39",
+        user: admin,
         text: `${user.name}, welcome to the party!`,
       });
       socket.broadcast.to(user.room).emit("message", {
-        user: "admin-alert-msg-8956-39",
+        user: admin,
         text: `${user.name} has been joined the party!`,
       });
 
@@ -40,7 +42,7 @@ function socket(io) {
 
       if (user) {
         io.to(user[0].room).emit("message", {
-          user: "admin-alert-msg-8956-39",
+          user: admin,
           text: `${user[0].name} has left the party!`,
         });
         io.to(user[0].room).emit("roomData", {
