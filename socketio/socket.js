@@ -9,7 +9,7 @@ const admin = "chatGlint-admin-28-09-2003";
 
 function socket(io) {
   io.on("connection", (socket) => {
-    socket.on("join", ({ name, room }) => {
+    socket.on("join", ({ name, room }, callback) => {
       const { error, user } = addUser({ id: socket.id, name, room });
 
       if (error) return console.log(error);
@@ -29,6 +29,8 @@ function socket(io) {
         room: user.room,
         users: getUsersInRoom(user.room),
       });
+
+      callback();
     });
 
     socket.on("sendMessage", (message, callback) => {
